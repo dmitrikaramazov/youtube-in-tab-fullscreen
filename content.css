@@ -1,0 +1,135 @@
+/* YouTube In-Tab Fullscreen Extension Stylesheet */
+
+/* When in-tab fullscreen is active on the body */
+body.yt-in-tab-fullscreen {
+  overflow: hidden !important;
+}
+
+/* Hide the main masthead (header) and all page content columns (sidebar, comments, title, details) */
+body.yt-in-tab-fullscreen #masthead-container,
+body.yt-in-tab-fullscreen ytd-masthead,
+body.yt-in-tab-fullscreen #guide,
+body.yt-in-tab-fullscreen ytd-guide-renderer,
+body.yt-in-tab-fullscreen #columns,
+body.yt-in-tab-fullscreen #primary,
+body.yt-in-tab-fullscreen #secondary,
+body.yt-in-tab-fullscreen #comments {
+  display: none !important;
+}
+
+/* Force direct layout container ancestors to reset transforms/filters that would break fixed positioning */
+body.yt-in-tab-fullscreen ytd-watch-flexy,
+body.yt-in-tab-fullscreen #player,
+body.yt-in-tab-fullscreen #player-container,
+body.yt-in-tab-fullscreen #player-container-inner,
+body.yt-in-tab-fullscreen #player-theater-container {
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
+  /* Reset margins and paddings that might shift the fixed player */
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Force the YouTube player wrapper element to fill the browser tab viewport */
+body.yt-in-tab-fullscreen ytd-player {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 20000 !important; /* Higher z-index to overlay columns and secondary sidebar details */
+  background: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+/* Make the inner player container fill its fixed parent */
+body.yt-in-tab-fullscreen #movie_player,
+body.yt-in-tab-fullscreen .html5-video-player {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 20000 !important;
+  background: #000000 !important;
+  transform: none !important;
+}
+
+/* Make sure popups, overlays, and dialog backdrops render on top of the fixed player */
+body.yt-in-tab-fullscreen ytd-popup-container,
+body.yt-in-tab-fullscreen tp-yt-paper-dialog,
+body.yt-in-tab-fullscreen tp-yt-iron-overlay-backdrop {
+  z-index: 2147483647 !important; /* Force to absolute top */
+}
+
+/* Custom player button styling */
+.yt-in-tab-fullscreen-btn {
+  display: inline-block;
+  vertical-align: top;
+  width: 46px;
+  height: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.1s cubic-bezier(0.4, 0, 1, 1);
+  position: relative;
+  text-align: center;
+}
+
+.yt-in-tab-fullscreen-btn:hover {
+  opacity: 1;
+}
+
+/* Center the SVG within the button */
+.yt-in-tab-fullscreen-btn svg {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* Tooltip styling matching native YouTube tooltips */
+.yt-in-tab-fullscreen-btn .yt-tooltip-custom {
+  position: absolute;
+  bottom: 49px; /* Positioned right above the control bar */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(28, 28, 28, 0.9);
+  color: #f1f1f1;
+  padding: 6px 10px;
+  border-radius: 2px;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+  z-index: 2147483647;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Show tooltip on button hover */
+.yt-in-tab-fullscreen-btn:hover .yt-tooltip-custom {
+  opacity: 1;
+}
+
+/* Hide the tooltip if controls are hiding or if the menu is open */
+.ytp-autohide .yt-in-tab-fullscreen-btn .yt-tooltip-custom {
+  display: none !important;
+}
+
+/* Hide the native theater mode and miniplayer buttons when in-tab fullscreen is active to declutter player controls */
+body.yt-in-tab-fullscreen .ytp-size-button,
+body.yt-in-tab-fullscreen .ytp-miniplayer-button {
+  display: none !important;
+}
