@@ -1,0 +1,8 @@
+# AI Assistant Folders
+.gemini/
+!.gemini/instructions.md
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
