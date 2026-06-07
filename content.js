@@ -193,13 +193,17 @@ document.addEventListener("fullscreenchange", () => {
 checkNavigation();
 injectButton();
 
-// MutationObserver to detect controls rendering instantly
+// MutationObserver to detect controls rendering instantly (throttled to save CPU cycles)
+let injectionTimeout = null;
 const observer = new MutationObserver(() => {
-  if (location.pathname === "/watch") {
-    const rightControls = document.querySelector(".ytp-right-controls");
-    if (rightControls && !document.querySelector(".yt-in-tab-fullscreen-btn")) {
-      injectButton();
-    }
+  if (location.pathname === "/watch" && !injectionTimeout) {
+    injectionTimeout = setTimeout(() => {
+      injectionTimeout = null;
+      const rightControls = document.querySelector(".ytp-right-controls");
+      if (rightControls && !document.querySelector(".yt-in-tab-fullscreen-btn")) {
+        injectButton();
+      }
+    }, 150);
   }
 });
 observer.observe(document.documentElement, {
