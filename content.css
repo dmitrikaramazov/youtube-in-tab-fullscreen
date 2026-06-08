@@ -17,11 +17,15 @@ body.yt-in-tab-fullscreen #comments {
   display: none !important;
 }
 
-/* Force direct layout container ancestors to reset transforms/filters that would break fixed positioning */
+/* Force all player ancestors up to the application root to reset containing blocks (transforms, filters, contains) */
+body.yt-in-tab-fullscreen ytd-app,
+body.yt-in-tab-fullscreen ytd-page-manager,
+body.yt-in-tab-fullscreen #page-manager,
 body.yt-in-tab-fullscreen ytd-watch-flexy,
 body.yt-in-tab-fullscreen #player,
-body.yt-in-tab-fullscreen #player-container,
+body.yt-in-tab-fullscreen #player-container-outer,
 body.yt-in-tab-fullscreen #player-container-inner,
+body.yt-in-tab-fullscreen #player-container,
 body.yt-in-tab-fullscreen #player-theater-container {
   transform: none !important;
   filter: none !important;
@@ -51,6 +55,23 @@ body.yt-in-tab-fullscreen ytd-player {
   margin: 0 !important;
   padding: 0 !important;
   transform: none !important;
+}
+
+/* Force the mounting container inside ytd-player to expand fully and override padding aspect ratio hacks */
+body.yt-in-tab-fullscreen ytd-player #container,
+body.yt-in-tab-fullscreen ytd-player #container.ytd-player {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  aspect-ratio: auto !important;
 }
 
 /* Make the inner player container fill its fixed parent */
