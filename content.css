@@ -5,15 +5,13 @@ body.yt-in-tab-fullscreen {
   overflow: hidden !important;
 }
 
-/* Hide the main masthead (header) and all page content columns (sidebar, comments, title, details) */
 body.yt-in-tab-fullscreen #masthead-container,
 body.yt-in-tab-fullscreen ytd-masthead,
 body.yt-in-tab-fullscreen #guide,
 body.yt-in-tab-fullscreen ytd-guide-renderer,
-body.yt-in-tab-fullscreen #columns,
-body.yt-in-tab-fullscreen #primary,
 body.yt-in-tab-fullscreen #secondary,
-body.yt-in-tab-fullscreen #comments {
+body.yt-in-tab-fullscreen #comments,
+body.yt-in-tab-fullscreen #below {
   display: none !important;
 }
 
@@ -22,15 +20,21 @@ body.yt-in-tab-fullscreen ytd-app,
 body.yt-in-tab-fullscreen ytd-page-manager,
 body.yt-in-tab-fullscreen #page-manager,
 body.yt-in-tab-fullscreen ytd-watch-flexy,
+body.yt-in-tab-fullscreen #columns,
+body.yt-in-tab-fullscreen #primary,
+body.yt-in-tab-fullscreen #primary-inner,
 body.yt-in-tab-fullscreen #player,
 body.yt-in-tab-fullscreen #player-container-outer,
 body.yt-in-tab-fullscreen #player-container-inner,
 body.yt-in-tab-fullscreen #player-container,
-body.yt-in-tab-fullscreen #player-theater-container {
+body.yt-in-tab-fullscreen #player-theater-container,
+body.yt-in-tab-fullscreen #player-full-bleed-container {
   transform: none !important;
   filter: none !important;
   perspective: none !important;
   contain: none !important;
+  container-type: normal !important;
+  will-change: auto !important;
   /* Reset margins and paddings that might shift the fixed player */
   margin: 0 !important;
   padding: 0 !important;
