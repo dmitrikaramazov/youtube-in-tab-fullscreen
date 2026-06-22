@@ -139,13 +139,14 @@ function checkNavigation() {
   const currentVideoId = new URLSearchParams(location.search).get("v");
   const isWatchPage = location.pathname === "/watch";
   
-  if (!isWatchPage || currentVideoId !== lastVideoId) {
-    // If we moved away from /watch or navigated to a different video, turn off fullscreen
+  if (!isWatchPage) {
+    // If we moved away from /watch, turn off fullscreen
     if (isActive) {
       toggle(false);
     }
-    lastVideoId = isWatchPage ? currentVideoId : null;
   }
+  
+  lastVideoId = isWatchPage ? currentVideoId : null;
 }
 
 // Receive messages from the background service worker (toolbar clicks, shortcuts)
@@ -162,9 +163,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 // Event Listeners for SPA navigation
-window.addEventListener("yt-navigate-start", () => {
+window.addEventListener("yt-navigate-start", (e) => {
   if (isActive) {
-    toggle(false);
+    // Only turn off fullscreen if we are navigating away from the watch page
+    const url = e?.detail?.url;
+    if (url && !url.includes("/watch")) {
+      toggle(false);
+    }
   }
 });
 
